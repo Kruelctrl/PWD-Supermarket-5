@@ -11,7 +11,13 @@ import App from './App';
 
 let globalState = createStore(allReducer, applyMiddleware(ReduxThunk))
 globalState.subscribe(() => console.log("Global State:", globalState.getState()))
+import { createStore, applyMiddleware } from 'redux'
+import ReduxThunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import allReducer from './reducers'
 
+let globalState = createStore(allReducer, applyMiddleware(ReduxThunk))
+globalState.subscribe(() => console.log("Global State : ", globalState.getState()))
 
 ReactDOM.render(
   <Provider store={globalState}>
@@ -20,6 +26,6 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
-);
+)
 
 

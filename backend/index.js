@@ -2,6 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyparser = require('body-parser')
+const mysql = require('mysql')
 require('dotenv').config()
 
 
@@ -17,6 +18,10 @@ app.use(bodyparser.json())
 // setup mysql
 // import connection
 const db = require('./database')
+const { userRouter } = require('./routers')
+
+//import router
+app.use('/user', userRouter)
 
 db.connect((err) => {
     // console.log(err)
