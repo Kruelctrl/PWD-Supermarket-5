@@ -8,7 +8,7 @@ import { BrowserRouter ,Route, Switch } from 'react-router-dom'
 import Navigation from './component/navigation'
 
 //import pages
-import Home from './pages/hometest'
+import Home from './pages/homepage'
 
 class App extends React.Component {
   render() {

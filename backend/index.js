@@ -32,6 +32,10 @@ db.connect((err) => {
 const response = (req, res) => res.status(200).send('<h1>API FINAL_PROJECT</h1>')
 app.get('/', response)
 
+//import router
+const{productRouter} = require('./router')
+app.use('/product', productRouter)
+
 
 // bind to local machine
 const PORT = process.env.PORT || 2000
