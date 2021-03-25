@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import Navigation from './component/navigation'
 
 //import pages
-import Home from './pages/hometest'
+import Home from './pages/homepage'
 import Login from './pages/login'
 import Register from './pages/register'
 import Verify from "./pages/verification"
