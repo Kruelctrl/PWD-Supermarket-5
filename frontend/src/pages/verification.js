@@ -39,6 +39,7 @@ class Verification extends React.Component {
             <div style={{ paddingTop : '50px'}}>
                 {
                     this.state.verified ?
+                    
                     <Link to='/'>
                         <Button >
                             Go To Home
