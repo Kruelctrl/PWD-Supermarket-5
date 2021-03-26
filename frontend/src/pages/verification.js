@@ -2,8 +2,17 @@ import React from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { connect } from 'react-redux'
+
+import {verification} from '../actions'
 
 class Verification extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        verified: false
+    }
+}
   async componentDidMount() {
     const token = this.props.location.search.substring(1);
 
@@ -12,6 +21,7 @@ class Verification extends React.Component {
         token,
       });
       console.log(res.data);
+      this.props.verification()
     } catch (err) {
       console.log(err);
     }
@@ -39,4 +49,11 @@ const styles = {
     marginTop: 200,
   },
 };
-export default Verification;
+
+const mapStateToProps = (state) => {
+  return {
+      status: state.user.regStatus
+  }
+}
+
+export default connect(mapStateToProps,(verification)) (Verification);

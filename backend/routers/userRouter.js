@@ -53,7 +53,7 @@ const {userController} = require ('../controllers')
 router.get ('/getUser', userController.getAllUser);
 router.post ('/login', userController.login);
 router.post('/keepLogin', verify, userController.keepLogin);
-router.get('/verification', verify, userController.emailVerification);
+router.post('/verification', verify, userController.emailVerification);
 router.post('/register', validator , userController.register)
 
 
