@@ -65,7 +65,7 @@ module.exports = {
         try {
             //get user data
             const getUser = `select * from user
-                            where username=${db.escape(req.user.username)}`
+                            where id_user =${db.escape(req.user.id)}`
 
             const result = await asyncQuery(getUser)
             console.log(result)
