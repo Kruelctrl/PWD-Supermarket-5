@@ -55,6 +55,7 @@ router.post ('/login', userController.login);
 router.post('/keepLogin', verify, userController.keepLogin);
 router.post('/verification', verify, userController.emailVerification);
 router.post('/register', validator , userController.register)
+router.patch('/editpass/:id', validatePassword, userController.editPass);
 
 
 //import router module

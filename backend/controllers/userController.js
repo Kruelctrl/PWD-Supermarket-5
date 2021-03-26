@@ -128,7 +128,8 @@ module.exports = {
                 Your PARCEL best provider,
                   FAT PARCEL.`,
                 html: `
-                <a href ="http://localhost:3000/verification/${token}">http://localhost:3000/verification/${token}</a>`,
+
+                <a href ="http://localhost:3000/verification?${token}">http://localhost:3000/verification?${token}</a>`,
             };
             const info = await transporter.sendMail(option);
             console.log(req.body);
@@ -165,14 +166,14 @@ module.exports = {
     },
 
     emailVerification: async (req, res) => {
+      console.log("test")
         try {
             // change status user in database
             const qUpdateStatus = `UPDATE user SET status = "verified" 
-                                    WHERE id_user = ${req.user.id} `;
+                                WHERE id_user = ${req.user.id} and username=${db.escape(req.user.username)}`;
+                                
             const updateStatus = await asyncQuery(qUpdateStatus);
             console.log(updateStatus)
-
-           
 
             res.status(200).send(`Congratulations! Your account has been verified`);
         }
@@ -180,8 +181,38 @@ module.exports = {
             console.log(err)
             res.status(400).send(err)
         }
-    }
-    
+    },
+    editPass: async (req, res) => {
+        const id = parseInt(req.params.id);
+        const { oldpass, newpass, confpass } = req.body;
+
+        if (newpass !== confpass) return res.status(400).send("New Password and Confirm Password Doesn't Match");
+
+        //check new password requirement
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) return res.status(400).send(errors.array()[0].msg);
+
+        try {
+            const queryCheckPass = `select * from user where id_user=${id}`
+            const check = await asyncQuery(queryCheckPass)
+
+            const hasholdpass = CryptoJS.HmacMD5(oldpass, SECRET_KEY);
+
+            if (hasholdpass.toString() !== check[0].password) return res.status(400).send("Old Password Doesn't Match");
+
+            //update password
+            const hashnewpass = CryptoJS.HmacMD5(newpass, SECRET_KEY);
+
+            const updatePass = `UPDATE user SET password='${hashnewpass.toString()}' WHERE id_user=${id}`;
+            const result = await asyncQuery(updatePass);
+            console.log(req.body)
+
+            res.status(200).send(result);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    },
+
 
 
 }

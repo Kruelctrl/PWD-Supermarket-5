@@ -24,21 +24,10 @@ class Verification extends React.Component {
       this.props.verification()
     } catch (err) {
       console.log(err);
+
     }
-  }
-  render() {
-    return (
-      <div style={styles.container}>
-        <h3 style={{ textAlign: "center" }}>Your Account Has Been Verified</h3>
-        <div style={{ textAlign: "center" }}>
-          <Button as={Link} to="/login">
-            Login
-          </Button>
-        </div>
-      </div>
-    );
-  }
 }
+
 
 const styles = {
   container: {
