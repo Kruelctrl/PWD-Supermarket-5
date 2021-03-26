@@ -27,7 +27,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         case 'VERIFICATION':
             return {
                 ...state,
-                regStatus: "verified"
+                regStatus: 'verified'
             }
         case 'LOGIN_ERR':
             return {

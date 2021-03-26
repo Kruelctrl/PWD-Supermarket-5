@@ -1,57 +1,48 @@
-import React from 'react'
-import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import React from "react";
+import Axios from "axios";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { connect } from 'react-redux'
 
-import {
-    Button
-} from 'react-bootstrap'
+import {verification} from '../actions'
 
 class Verification extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state= {
-            verified: false
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+        verified: false
     }
+}
+  async componentDidMount() {
+    const token = this.props.location.search.substring(1);
 
-    async componentDidMount () {
-        const token= this.props.location.search.substring(1)
-        console.log(token)
-       
-        try {
-            const res= await Axios.post('http://localhost:2000/user/verification', {token})
+    try {
+      const res = await Axios.post("http://localhost:2000/user/verification", {
+        token,
+      });
+      console.log(res.data);
+      this.props.verification()
+    } catch (err) {
+      console.log(err);
 
-            console.log(res.data)
-
-            // this.setState({ verified: true })
-            this.setState({verified : true})
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
-
-    render () {
-        
-
-        return (
-            <div style={{ paddingTop : '50px'}}>
-                {
-                    this.state.verified ?
-                    <Link to='/'>
-                        <Button >
-                            Go To Home
-                        </Button>
-                    </Link>
-                    :
-                    <h1>Loading...</h1>
-                }
-            </div>
-        )
     }
 }
 
 
+const styles = {
+  container: {
+    margin: "auto",
+    height: 400,
+    width: 500,
+    alignItems: "center",
+    marginTop: 200,
+  },
+};
 
-export default Verification
+const mapStateToProps = (state) => {
+  return {
+      status: state.user.regStatus
+  }
+}
+
+export default connect(mapStateToProps,(verification)) (Verification);
