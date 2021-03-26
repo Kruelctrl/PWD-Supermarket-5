@@ -62,11 +62,10 @@ module.exports = {
         }
     },
     keepLogin: async (req, res) => {
-        console.log(req.user)
         try {
             //get user data
             const getUser = `select * from user
-                            where id_user=${db.escape(req.user.id)}`
+                            where username=${db.escape(req.user.username)}`
 
             const result = await asyncQuery(getUser)
             console.log(result)
@@ -128,7 +127,6 @@ module.exports = {
                 Your PARCEL best provider,
                   FAT PARCEL.`,
                 html: `
-
                 <a href ="http://localhost:3000/verification?${token}">http://localhost:3000/verification?${token}</a>`,
             };
             const info = await transporter.sendMail(option);
@@ -174,6 +172,7 @@ module.exports = {
                                 
             const updateStatus = await asyncQuery(qUpdateStatus);
             console.log(updateStatus)
+
 
             res.status(200).send(`Congratulations! Your account has been verified`);
         }
