@@ -10,7 +10,7 @@ class Home extends React.Component {
         return (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <h1>This is Home</h1>
-                <Button variant="primary" as={Link} to='/product'>Go to Product Page</Button>
+                <Button variant="primary" as={Link} to='/cartPage'>Go to Cart</Button>
             </div>
         )
     }

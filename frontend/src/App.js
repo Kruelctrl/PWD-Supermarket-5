@@ -9,6 +9,7 @@ import Navigation from './component/navigation'
 
 //import pages
 import Home from './pages/hometest'
+import Cart from './pages/cartPage'
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
         <Navigation/>
         <Switch>
           <Route path='/' component={Home} exact />
+          <Route path='/Cart' component={Cart}/>
         </Switch>
       </div>
     )

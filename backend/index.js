@@ -2,7 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyparser = require('body-parser')
-require('dotenv').config()
+// require('dotenv').config()
 
 
 // main app
@@ -31,6 +31,10 @@ db.connect((err) => {
 // main route
 const response = (req, res) => res.status(200).send('<h1>API FINAL_PROJECT</h1>')
 app.get('/', response)
+
+// import router
+const {cartProductRouter} = require('./routers')
+app.use('/getCart', cartProductRouter)
 
 
 // bind to local machine
