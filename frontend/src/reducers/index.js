@@ -1,11 +1,13 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 
+import {productReducer} from './productReducers'
 import { userReducer } from './userReducer'
-import  cartReducer  from './cartReducer'
+import { cartReducer } from './cartReducer'
 
 const allReducer = combineReducers({
     user: userReducer,
+    product: productReducer,
     cart: cartReducer
-});
+})
 
-export default Reducers
+export default allReducer

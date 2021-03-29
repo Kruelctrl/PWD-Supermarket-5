@@ -2,7 +2,9 @@
 const express = require('express')
 const cors = require('cors')
 const bodyparser = require('body-parser')
-// require('dotenv').config()
+
+const mysql = require('mysql')
+require('dotenv').config()
 
 
 // main app
@@ -17,6 +19,10 @@ app.use(bodyparser.json())
 // setup mysql
 // import connection
 const db = require('./database')
+const { userRouter } = require('./routers')
+
+//import router
+app.use('/user', userRouter)
 
 db.connect((err) => {
     // console.log(err)
@@ -33,8 +39,9 @@ const response = (req, res) => res.status(200).send('<h1>API FINAL_PROJECT</h1>'
 app.get('/', response)
 
 // import router
-const {cartProductRouter} = require('./routers')
+const {cartProductRouter, productRouter} = require('./routers')
 app.use('/getCart', cartProductRouter)
+app.use('/product', productRouter)
 
 
 // bind to local machine
